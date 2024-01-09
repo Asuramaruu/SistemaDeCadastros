@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        body
+        {
+            background-image: url(https://br.godaddy.com/blog/wp-content/uploads/background-css.jpg);
+            background-size: 75%;
+            background-repeat: no-repeat;
+        }
+        .inputs
+        {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin: 20px;
+        }
+        .botoes
+        {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            padding-top: 10px;
+            height: 100px;
+            border: 1px solid #c3c3c3; ;
+            border-radius: 10px;
+            
+        }
+        button{
+            margin-left: 90px;
+            width: 100px;
+            height: 50px;
+
+        }
+
+    </style>
+
+
+
+</head>
+<body>
+    <h1>Sistema de cadastro</h1>
+    <div class="inputs">
+        Matrícula <input type="text" id="inpMatrícula"><br>
+        Nome <input type="text" id="inpNome"> <br>
+        Curso <input type="text" id="inpCurso"><br>
+        Nota <input type="text" id="inpNota"><br>
+    </div>
+    <div class="botoes">
+        <button onclick="Cadastrar()">Cadastrar</button>
+        <button onclick="Buscar()">Localizar</button>
+        <button onclick="Editar()">Editar</button>
+        <button onclick="Apagar()">Apagar</button>
+        <button onclick="Mostrar()">Mostrar Tudo</button>
+        <button onclick="Deletar()">Deletar</button>
+    </div>
+    <div id="divPainel"></div>
+    <script>
+         const nome=[]
+         const curso=[]
+         const matricula=[]
+         const nota=[]
+         var semblante
+
+        function Cadastrar()
+        {
+            
+            
+            nome.push(document.getElementById("inpNome").value)
+            curso.push(document.getElementById("inpCurso").value)
+            matricula.push(document.getElementById("inpMatrícula").value)
+            nota.push(document.getElementById("inpNota").value)
+            document.getElementById("inpNome").value = ""
+            document.getElementById("inpCurso").value = ""
+            document.getElementById("inpMatrícula").value = ""
+            document.getElementById("inpNota").value = ""
+            document.getElementById("inpNome").focus
+
+
+        }
+        function Buscar()
+        {
+            let buscar = document.getElementById("inpMatrícula").value
+            semblante = matricula.indexOf(buscar)
+            if(semblante != -1)
+            {
+                document.getElementById("inpCurso").value = curso[semblante]
+                document.getElementById("inpNome").value = nome[semblante]
+                document.getElementById("inpNota").value = nota[semblante]
+            }else
+            alert("Nenhum usuário cadastrado por esse nome.")
+        }
+
+
+
+
+        function Mostrar()
+        {
+            
+            document.getElementById("divPainel").innerHTML = "Matrícula: "+matricula+"<br>"+ "Nome do Aluno: " +nome+"<br>"+"Cursando: " +curso+"<br>" + "Nota:"+nota
+        }
+
+        function Apagar()
+        {
+            matricula = []
+            nome = []
+            curso = []
+            nota = []
+
+        }
+
+        function Editar()
+        {
+            matricula[semblante] = document.getElementById("inpMatrícula").value
+            nome[semblante] = document.getElementById("inpNome").value
+            curso[semblante] = document.getElementById("inpCurso").value
+            nota[semblante] = document.getElementById("inpNota").value
+        }
+        function Deletar()
+        {
+            if(semblante != -1)
+            {
+                matricula.splice(semblante, 1)
+                nome.splice(semblante, 1)
+                curso.splice(semblante, 1)
+                nota.splice(semblante, 1)
+                document.getElementById("inpNome").value = ""
+                document.getElementById("inpCurso").value = ""
+                document.getElementById("inpMatrícula").value = ""
+                document.getElementById("inpNota").value = ""
+                document.getElementById("inpNome").focus
+            }
+            else{}
+        }
+
+    </script>
+    
+</body>
+</html>
